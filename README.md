@@ -12,7 +12,7 @@ It has a dry-run mode that shows exactly what a real run would do, including ren
 ## Usage
 
 ```bash
-python organizer.py [-p PATH] [-r] [-t] [-m]
+python FileOrgnizer.py [-p PATH] [-r] [-t] [-m]
 ```
 
 > **Careful:** if you don't pass `-p`, the script organizes your real `~/Downloads` folder. Run it with `-t` first.
@@ -30,22 +30,22 @@ python organizer.py [-p PATH] [-r] [-t] [-m]
 
 Organize your Downloads folder (top-level files only):
 ```bash
-python organizer.py
+python FileOrgnizer.py
 ```
 
 Organize a specific folder, including its subfolders:
 ```bash
-python organizer.py -p ~/Desktop/Test -r
+python FileOrgnizer.py -p ~/Desktop/Test -r
 ```
 
 Organize a folder, including subfolders, and remove the subfolders that end up empty:
 ```bash
-python organizer.py -p ~/Desktop/Test -r -m
+python FileOrgnizer.py -p ~/Desktop/Test -r -m
 ```
 
 Preview what a run would do, without changing anything:
 ```bash
-python organizer.py -p ~/Downloads -r -m -t
+python FileOrgnizer.py -p ~/Downloads -r -m -t
 ```
 
 ### Sample output
@@ -64,7 +64,7 @@ test/
     └── doc.pdf
 ```
 
-`python organizer.py -p test -r -m -t` prints:
+`python FileOrgnizer.py -p test -r -m -t` prints:
 
 ```
 Would move test/x/y/photo.jpg to test/Images/photo.jpg
@@ -77,7 +77,17 @@ Would remove test/w
 Total: would remove 2 empty folders
 ```
 
-`x/z` is kept because it still contains the hidden file `.hidden`, and `x` is kept because `x/z` is still inside it. Folders at the same depth may be listed in a different order. Running the same command without `-t` gives the same result.
+`x/z` is kept because it still contains the hidden file `.hidden`, and `x` is kept because `x/z` is still inside it. Folders at the same depth may be listed in a different order.
+
+Running the same command without `-t` removes the same folders and reports the same total. The real run also prints one error line for each folder it could not remove, because the operating system refuses to delete a folder that is not empty:
+
+```
+[Errno 39] Directory not empty: 'test/x/z'
+[Errno 39] Directory not empty: 'test/x'
+Total: removed 2 empty folders
+```
+
+These lines are expected. They are the "Would keep" cases from the preview, and nothing is deleted or damaged. The exact wording of the error depends on your operating system.
 
 ## How it works
 
@@ -108,7 +118,7 @@ With `-r -m`, the script removes sub-folders that it emptied by moving their fil
 
 - It only removes **empty** folders. Files are never deleted.
 - It only considers folders it actually took files from. Folders that were already empty before the run are left alone.
-- A folder that still contains anything (for example a hidden file) is kept, and so are its parents.
+- A folder that still contains anything (for example a hidden file) is kept, and so are its parents. In a real run, the script tries to remove such a folder, the operating system refuses, and the script prints a "Directory not empty" message and continues. This is expected and harmless. The dry run shows these folders as "Would keep" instead.
 - The target folder itself and the category folders are never removed.
 - With `-t`, it prints which folders would be removed or kept, using the same rules as the real run.
 - `-m` has no effect without `-r`, and the script prints a warning.
