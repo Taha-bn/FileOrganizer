@@ -133,9 +133,9 @@ def main():
 
         folder_message = "folder" if counter == 1 else "folders"
         if args.test :
-            print(f"Would remove {counter} empty {folder_message}")
+            print(f"Total: would remove {counter} empty {folder_message}")
         else:
-            print(f"Removed {counter} empty {folder_message}")
+            print(f"Total: removed {counter} empty {folder_message}")
         
         
 
