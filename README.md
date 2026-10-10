@@ -74,7 +74,7 @@ Would remove test/x/y
 Would keep test/x/z (not empty)
 Would keep test/x (not empty)
 Would remove test/w
-Would remove 2 empty folders
+Total : would remove 2 empty folders
 ```
 
 `x/z` is kept because it still contains the hidden file `.hidden`, and `x` is kept because `x/z` is still inside it. Folders at the same depth may be listed in a different order. Running the same command without `-t` gives the same result.
