@@ -49,7 +49,7 @@ extension_map = {
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-p','--path' , type=Path , default= Path.home() / "Downloads" )
-    parser.add_argument('-r' , '--recursive' , action='store_true' ,help ='Also organise the files in the sub-folders')
+    parser.add_argument('-r' , '--recursive' , action='store_true' ,help ='Also organize the files in the sub-folders')
     parser.add_argument('-t' , '--test' ,action='store_true' ,help ='A test so you can see what happens without moving anything')
     parser.add_argument('-m' , '--remove-empty' , action='store_true' ,help = 'Remove the sub-folders left empty after their files were moved, used with -r')
     args = parser.parse_args()
