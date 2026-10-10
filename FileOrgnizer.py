@@ -124,8 +124,11 @@ def main():
                     else:
                         print(f"Would keep {folder} (not empty)")
                 else:
-                    folder.rmdir()
-                    counter += 1
+                    if any(folder.iterdir()):
+                        print(f"Kept {folder} (not empty)")
+                    else:
+                        folder.rmdir()
+                        counter += 1
             except PermissionError:
                 print(f"You don't have the permission to remove {folder}")
             except OSError as er:
