@@ -12,7 +12,7 @@ It has a dry-run mode that shows exactly what a real run would do, including ren
 ## Usage
 
 ```bash
-python FileOrgnizer.py [-p PATH] [-r] [-t] [-m]
+python FileOrganizer.py [-p PATH] [-r] [-t] [-m]
 ```
 
 > **Careful:** if you don't pass `-p`, the script organizes your real `~/Downloads` folder. Run it with `-t` first.
@@ -30,22 +30,22 @@ python FileOrgnizer.py [-p PATH] [-r] [-t] [-m]
 
 Organize your Downloads folder (top-level files only):
 ```bash
-python FileOrgnizer.py
+python FileOrganizer.py
 ```
 
 Organize a specific folder, including its subfolders:
 ```bash
-python FileOrgnizer.py -p ~/Desktop/Test -r
+python FileOrganizer.py -p ~/Desktop/Test -r
 ```
 
 Organize a folder, including subfolders, and remove the subfolders that end up empty:
 ```bash
-python FileOrgnizer.py -p ~/Desktop/Test -r -m
+python FileOrganizer.py -p ~/Desktop/Test -r -m
 ```
 
 Preview what a run would do, without changing anything:
 ```bash
-python FileOrgnizer.py -p ~/Downloads -r -m -t
+python FileOrganizer.py -p ~/Downloads -r -m -t
 ```
 
 ### Sample output
@@ -64,7 +64,7 @@ test/
     └── doc.pdf
 ```
 
-`python FileOrgnizer.py -p test -r -m -t` prints:
+`python FileOrganizer.py -p test -r -m -t` prints:
 
 ```
 Would move test/x/y/photo.jpg to test/Images/photo.jpg
